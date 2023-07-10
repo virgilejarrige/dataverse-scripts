@@ -1,15 +1,12 @@
 import csv
 import requests
 
-# Modify these variables
-# Set the base URL of your Dataverse installation
-base_url = "https://datavers_url.com"
+# Read user variables from the text file
+with open("user_variables.txt", mode="r") as var_file:
+    user_variables = var_file.read()
 
-# Set the API token for authentication
-api_token = "your_secret_token"
-
-# Set the collection to search within
-collection = "collection_id"  # Replace with the desired collection identifier
+# Evaluate the user variables as Python code
+exec(user_variables)
 
 #-------------------------------------
 # Don't modify any further!
@@ -71,20 +68,26 @@ if response.status_code == 200:
                     title = dataset["name"]
                     metadata_blocks = dataset["metadataBlocks"]
 
-                    # Extract the affiliation from the metadata blocks
+                    # Initialize affiliation to None
                     affiliation = None
-                    if "citation" in metadata_blocks and "fields" in metadata_blocks["citation"]:
-                        fields = metadata_blocks["citation"]["fields"]
-                        for field in fields:
-                            if "datasetContactAffiliation" in field["value"][0]:
-                                affiliation = field["value"][0]["datasetContactAffiliation"]["value"]
-                                break
+
+                    try:
+                        # Extract the affiliation from the metadata blocks
+                        if "citation" in metadata_blocks and "fields" in metadata_blocks["citation"]:
+                            fields = metadata_blocks["citation"]["fields"]
+                            for field in fields:
+                                if "datasetContactAffiliation" in field["value"][0]:
+                                    affiliation = field["value"][0]["datasetContactAffiliation"]["value"]
+                                    break
+                    except KeyError:
+                        pass
 
                     global_id = dataset["global_id"]
 
                     # Escape the commas in the title and affiliation, enclosing them in double quotation marks
                     title = title.replace(",", "\\,").replace('"', '""')
-                    affiliation = affiliation.replace(",", "\\,").replace('"', '""')
+                    if affiliation:
+                        affiliation = affiliation.replace(",", "\\,").replace('"', '""')
 
                     writer.writerow([f'"{title}"', f'"{affiliation}"', global_id])
 
