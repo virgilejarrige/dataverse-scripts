@@ -3,7 +3,7 @@ import requests
 import json
 
 # Read user variables from the text file
-with open("user_variables.txt", mode="r") as var_file:
+with open("user_variables.py", mode="r") as var_file:
     user_variables = var_file.read()
 
 # Evaluate the user variables as Python code
