@@ -1,7 +1,7 @@
 # dataverse-scripts
 Generic scripts to be used with dataverse - https://github.com/IQSS/dataverse
 
-## Modify user_variables.py first. 
+## Clone the repository and modify user_variables.py with your informations. 
 
 ## 1-extract_title-PID-affiliation.py
 Will extract the title, affiliation and PID of all the datasets of a specific collection to a csv file
