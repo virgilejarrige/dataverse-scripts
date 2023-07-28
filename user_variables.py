@@ -26,3 +26,11 @@ target_collection = "target_collection"  # Replace with the ID of the desired ta
 
 # Set the affiliation pattern to be matched
 affiliation_pattern = "pattern"  # Update with the desired affiliation pattern
+
+
+#----
+
+#random-file-uploader and download_files.py
+
+# Set the DOI of the dataset in which you want to send random files to or in which you want to download files.
+DOI = "doi:10.xxxxx/xxxxx"
