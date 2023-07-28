@@ -10,3 +10,5 @@ Will link all the datasets with a specific affiliation to a specific collection,
 ## random_files_upload.py
 Randomly generates 5 files (csv, jpg or txt) of 500kb to 1Mb and then uploads them to a specific dataset
 pip install faker reportlab pandas pillow pyDataverse
+## download_files.py
+Allows to download files based on user input. All files of a dataset are displayed, and the user chosses which ones he wants to download.
