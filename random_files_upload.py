@@ -12,15 +12,15 @@ from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from PIL import Image
 
-# Remplacer BASE_URL et API_TOKEN par vos informations
-BASE_URL = "YOUR_BASE_URL_HERE"
-API_TOKEN = "YOUR_API_TOKEN_HERE"
+# Read user variables from the text file
+with open("user_variables.py", mode="r") as var_file:
+    user_variables = var_file.read()
+
+# Evaluate the user variables as Python code
+exec(user_variables)
 
 # Créer une instance NativeApi
-api = NativeApi(BASE_URL, API_TOKEN)
-
-# Remplacer DOI par le DOI du Dataset existant
-DOI = "doi:10.5072/FK2/EO7BNB"
+api = NativeApi(base_url, api_token)
 
 # Fonction pour générer un fichier texte aléatoire de taille comprise entre 500 Ko et 1 Mo
 def generate_random_text_file():
